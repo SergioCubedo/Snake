@@ -39,6 +39,7 @@ public class Board extends JPanel implements ActionListener {
 
     public void initValues() {
         setFocusable(true);
+        snake = new Snake();
         deltaTime = 500;
 
     }
@@ -88,7 +89,9 @@ public class Board extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         //drawBoard(g);
-        snake.draw(g, getSquareWidth(), getSquareHeight());
+        if (snake != null) {
+             snake.draw(g, getSquareWidth(), getSquareHeight());
+        }
 
     }
 
