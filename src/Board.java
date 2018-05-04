@@ -7,6 +7,8 @@
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -15,6 +17,50 @@ import javax.swing.Timer;
  * @author alu20490610w
  */
 public class Board extends JPanel implements ActionListener {
+    
+    class MyKeyAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    if (canMoveTo(DirectionType.LEFT)) {
+                        currentCol--;
+                    }
+
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (canMoveTo(DirectionType.RIGTH, currentRow, currentCol + 1)) {
+                        currentCol++;
+                    }
+
+                    break;
+                case KeyEvent.VK_UP:
+                    Shape rotaShape = currentShape.rotated(); 
+                    if (canMoveTo(rotaShape, currentRow, currentCol) && !isPaused) {
+                        currentShape = rotaShape;
+                    }
+
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (canMoveTo(DirectionType.DOWN, currentRow + 1, currentCol) && !isPaused) {
+                        currentRow++;
+                    }
+                    break;
+                case KeyEvent.VK_P:
+                    if (timer.isRunning()) {
+                        timer.stop();
+                        isPaused = true;
+                    } else {
+                        timer.start();
+                        isPaused = false;
+                    }
+                default:
+                    break;
+            }
+            repaint();
+        }
+    }
 
     public static final int NUM_ROWS = 30;
     public static final int NUM_COLS = 10;
@@ -52,7 +98,7 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CanMoveTo()
     }
 
     private void processGameOver() {

@@ -30,6 +30,10 @@ public class Snake {
     public ArrayList<Node> getListNodes() {
         return arrayListNode;
     }
+    public void  changeDirection(DirectionType direction) {
+        this.directionType = direction;
+        
+    }
 
     private void initsNodes() {
         arrayListNode = new ArrayList<Node>();

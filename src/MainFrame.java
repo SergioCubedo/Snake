@@ -37,6 +37,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelScoreBoard.setText("ScoreBoard: ");
         getContentPane().add(jLabelScoreBoard, java.awt.BorderLayout.PAGE_END);
 
+        board1.setBackground(new java.awt.Color(204, 204, 255));
+
         javax.swing.GroupLayout board1Layout = new javax.swing.GroupLayout(board1);
         board1.setLayout(board1Layout);
         board1Layout.setHorizontalGroup(
